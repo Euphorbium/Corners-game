@@ -1,4 +1,5 @@
 from copy import deepcopy
+
 import pygame
 
 RED = (255,0,0)
@@ -16,7 +17,7 @@ def minimax(position, depth, max_player, game):
             maxEval = max(maxEval, evaluation)
             if maxEval == evaluation:
                 best_move = move
-        
+        # print(maxEval)
         return maxEval, best_move
     else:
         minEval = float('inf')
@@ -29,26 +30,51 @@ def minimax(position, depth, max_player, game):
         
         return minEval, best_move
 
+def alphabeta(board, depth, alpha, beta, max_player, game):
+    print(f'alphabeta called: {depth} {alpha} {beta}')
+    if depth == 0 or board.winner() != None:
+        print(f'{alpha} {beta}')
+        return board.evaluate(), board
 
-def simulate_move(piece, move, board, game, skip):
+    if max_player:
+        maxEval = float('-inf')
+        for move in get_all_moves(board, WHITE, game):
+            evaluation = alphabeta(move, depth-1, alpha, beta, False, game)[0]
+            maxEval = max(maxEval, evaluation)
+            if maxEval >= beta:
+                print(f'best move found {alpha}')
+                break
+            alpha = max(alpha, maxEval)
+        return maxEval, move
+    else:
+        minEval = float('inf')
+        for move in get_all_moves(board, RED, game):
+            evaluation = alphabeta(move, depth-1, alpha, beta, True, game)[0]
+            minEval = min(minEval, evaluation)
+            if minEval <= alpha:
+                break
+            beta = min(beta, minEval)
+        return minEval, move
+
+
+def simulate_move(piece, move, board):
     board.move(piece, move[0], move[1])
-    if skip:
-        board.remove(skip)
+
 
     return board
 
 
 def get_all_moves(board, color, game):
-    moves = []
+    moves = set()
 
     for piece in board.get_all_pieces(color):
         valid_moves = board.get_valid_moves(piece)
         for move, skip in valid_moves.items():
-            draw_moves(game, board, piece)
+            # draw_moves(game, board, piece)
             temp_board = deepcopy(board)
             temp_piece = temp_board.get_piece(piece.row, piece.col)
-            new_board = simulate_move(temp_piece, move, temp_board, game, skip)
-            moves.append(new_board)
+            new_board = simulate_move(temp_piece, move, temp_board)
+            moves.add(new_board)
     
     return moves
 

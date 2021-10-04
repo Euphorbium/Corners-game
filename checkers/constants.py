@@ -1,14 +1,20 @@
-import pygame
-
 WIDTH, HEIGHT = 800, 800
 ROWS, COLS = 8, 8
-SQUARE_SIZE = WIDTH//COLS
+SQUARE_SIZE = WIDTH // COLS
 
 # rgb
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
-GREY = (128,128,128)
+GREY = (128, 128, 128)
 
-CROWN = pygame.transform.scale(pygame.image.load('assets/crown.png'), (44, 25))
+TABLE = [[10, 7, 6, 5, 4, 3, 2, 0],
+         [7, 9, 8, 7, 3, 2, 0, -2],
+         [6, 8, 7, 6, 2, 0, -2, -3],
+         [5, 7, 6, 5, 0, -2, -3, -4],
+         [4, 3, 2, 0, -5, -6, -7, -5],
+         [3, 2, 0, -2, -6, -7, -8, -6],
+         [2, 0, -2, -3, -7, -8, -9, -7, ],
+         [0, -2, -3, -4, -5, -6, -7, -10],
+         ]

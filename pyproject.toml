@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "corners-game"
+version = "0.1.0"
+description = "Corners game. You need to get your (red) checkers to the opposite side. You can jump any piece, but can not capture."
+authors = ["Euphorbium <compositum@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pygame = "^2.0.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
