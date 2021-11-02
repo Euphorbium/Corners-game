@@ -27,7 +27,7 @@ def main():
     while run:
         clock.tick(FPS)
         if game.turn == WHITE:
-            value, new_board = minimax(game.get_board(), 3, WHITE, game)
+            value, new_board = minimax(game.get_board(), 4, WHITE, game)
             # value, new_board = alphabeta(game.get_board(), 3, float('-inf'), float('inf'), WHITE, game)
             # print(f'value {value}')
             game.ai_move(new_board)

@@ -39,16 +39,18 @@ class Board:
         for row in range(ROWS):
             self.board.append([])
             for col in range(COLS):
-                if col < 4:
-                    if row < 4:
+                if col < 3:
+                    if row < 3:
                         self.board[row].append(Piece(row, col, WHITE))
                     else:
                         self.board[row].append(0)
-                else:
-                    if row >= 4:
+                elif col >=5:
+                    if row >= 5:
                         self.board[row].append(Piece(row, col, RED))
                     else:
                         self.board[row].append(0)
+                else:
+                    self.board[row].append(0)
 
     def draw(self, win):
         self.draw_squares(win)
@@ -59,8 +61,8 @@ class Board:
                     piece.draw(win)
 
     def winner(self):
-        top_corner = [self.board[row][col] for row in range(4) for col in range(4)]
-        bottom_corner = [self.board[row][col] for row in range(4, 8) for col in range(4, 8)]
+        top_corner = [self.board[row][col] for row in range(3) for col in range(3)]
+        bottom_corner = [self.board[row][col] for row in range(5, 8) for col in range(5, 8)]
         if all(top_corner):
             if all([piece.color == RED for piece in top_corner]):
                 return RED
